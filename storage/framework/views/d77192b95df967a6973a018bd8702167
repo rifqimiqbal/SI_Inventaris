@@ -1,0 +1,127 @@
+ 
+<?php $__env->startSection('content'); ?>
+
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Detail Aktiva</div>
+        <div class="panel-body">
+
+
+
+
+
+
+		<?php echo Form::open( ['class' => 'barang','files'=>true]); ?>
+
+		        <div class="form-group">
+ 				<?php echo Form::label('id barang', 'Nomor Inventaris', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('id_barang',  $barang->nomor_inventaris,array('class' => 'form-control','readonly' => true)); ?></div>
+				</div><br/><br/> <br/>
+				<div class="form-group">
+ 				<?php echo Form::label('nama_barang', 'Nama Barang', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('nama_barang',  $barang->nama_barang,array('class' => 'form-control','readonly' => true)); ?></div>
+				</div><br/><br/> <br/>
+				<div class="form-group">
+				<?php echo Form::label('merek', 'Merek', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('merek', $barang->merek, array('class' => 'form-control','readonly' => true)); ?>	</div>
+				</div><br/><br/> 
+				<div class="form-group">
+				<?php echo Form::label('tahun', 'Tahun', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::input('number','tahun', $barang->tahun, array('class' => 'form-control','readonly' => true)); ?>	</div>
+				</div><br/><br/> 
+
+                
+				
+				
+
+                <div class="form-group">
+				<?php echo Form::label('rayon_area', 'Rayon/Area', array('class' => 'col-md-4 control-label')); ?>
+
+				
+				<div class="col-md-6"><?php echo Form::text('rayon_area', $barang->ruang->area->nama_area, array('class' => 'form-control','readonly' => true)); ?>	</div>
+				</div><br/>
+
+				<div class="form-group">
+				<?php echo Form::label('ruang', 'Ruangan', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('ruang', $barang->ruang->nama_ruang, array('class' => 'form-control','readonly' => true)); ?>	</div>
+				</div><br/>
+
+     		   <div class="form-group">
+ 				<?php echo Form::label('jumlah', 'Jumlah', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::input('number', 'jumlah',   $barang->jumlah, array('class' => 'form-control','readonly' => true)); ?>
+
+				</div>
+     		   </div><br/><br/> <br/>
+
+     		   <div class="form-group">
+				<?php echo Form::label('satuan', 'Satuan', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('satuan', $barang->satuan, array('class' => 'form-control','readonly' => true)); ?>	</div>
+				</div><br/>
+
+     		   <div class="form-group">
+				<?php echo Form::label('fisik', 'Fisik', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('fisik', $barang->fisik, array('class' => 'form-control','readonly' => true)); ?>	</div>
+				</div><br/>
+
+				<div class="form-group">
+ 				<?php echo Form::label('keterangan', 'Keterangan', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::textarea('keterangan',  $barang->keterangan,array('class' => 'form-control','readonly' => true),''); ?></div>
+				</div><br/><br/> <br/> <br/><br/> <br/><br/><br/> 
+                
+                <div class="form group">
+                <?php echo Form::label('gambar', 'Gambar', array('class' => 'col-md-4 control-label')); ?>
+
+                <div class="col-md-6">
+                	<?php
+                	if(empty($barang->gambar))
+                	{
+                	 ?>
+                	<img src="../../imgbarang/default.jpg" width="auto" height="auto">
+                    
+                    <?php
+                	}
+                    ?>
+                    <?php
+                    if(!empty($barang->gambar))
+                    {
+                    ?>
+                    <img src="<?php echo e(URL::to(substr($barang->gambar,0))); ?>" width="auto" height="auto">
+                    <?php
+                	}
+                    ?>
+
+                </div>
+            </div><br/><br/> 
+
+           
+    			
+    			
+
+    			<div class="form-group"><br/> <br/>
+				<div class="col-md-6 col-md-offset-4"><br/> <br/>
+					<a class="btn btn-default" href="../../barang">Kembali</a>
+				</div>
+				<?php echo Form::close(); ?>
+
+    			</div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

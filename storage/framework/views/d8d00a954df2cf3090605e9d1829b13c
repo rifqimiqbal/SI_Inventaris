@@ -1,0 +1,232 @@
+        
+ 
+ 
+<?php $__env->startSection('content'); ?>
+
+   <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Cari Barang</div>
+        <div class="panel-body">
+
+
+
+
+
+    <?php echo Form::open(array('action' => 'BarangController@search')); ?>
+
+<div class="form-group">
+  
+        <?php echo Form::label('nama_barang', 'Nama Barang', array('class' => 'col-md-4 control-label')); ?>
+
+        <div class="col-md-6">
+        <?php echo Form::text('nama_barang', null,array('class' => 'form-control')); ?></div>
+        </div><br/><br><br>
+        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+        <div class="form-group">
+        <?php echo Form::label('merek', 'Merek', array('class' => 'col-md-4 control-label')); ?>
+
+        <div class="col-md-6"><?php echo Form::text('merek',null, array('class' => 'form-control')); ?>  </div>
+        </div><br/><br><br>
+           
+        <div class="form-group">
+  <label class="col-md-4 control-label" >Rayon</label>
+  <div class="col-md-6">  
+        <select name='area'  class="form-control">
+<!--  -->
+        <option value="" selected>
+              
+            </option>
+
+          <?php foreach($area as $item): ?>
+          <?php foreach($item as $item2): ?>
+          <option value="<?php echo e($item2->id_area); ?>">
+ 
+            <?php echo e($item2->nama_area); ?>
+
+          </option>
+          <?php endforeach; ?>
+          <?php endforeach; ?>
+        </div>
+</div> <br/> <br/>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" ></label>
+  <div class="col-md-6">
+  <select class="form-control" >
+    <option></option>
+    <option></option>
+  </select></div>
+</div> <br/> <br/>
+
+        <div class="form-group">
+  <label class="col-md-4 control-label" >Ruangan</label>
+  <div class="col-md-6">  
+
+          <select name='ruang'  class="form-control">
+             <option value="" selected>
+              
+            </option>
+              <?php foreach($ruang as $item3): ?>
+              <?php foreach($item3 as $item4): ?>
+            <option value="<?php echo e($item4->id_ruang); ?>">
+             <?php echo e($item4->area->nama_area); ?><?php echo " - " ?> <?php echo e($item4->nama_ruang); ?>
+
+            </option>
+            <?php endforeach; ?>
+            <?php endforeach; ?>
+          
+          
+        </div>
+</div> <br/> <br/>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" ></label>
+  <div class="col-md-6">
+  <select class="form-control" >
+    <option></option>
+    <option></option>
+  </select></div>
+</div> <br/> <br/>
+
+            <div class="form-group"><br/> <br/>
+        <div class="col-md-6 col-md-offset-4">
+          <?php echo Form::submit('Cari ', ['class'=>'btn primary']); ?>
+
+        </div>
+          <?php echo Form::close(); ?>
+
+          </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+   
+
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 col-md-offset-0">
+      <div class="panel panel-default">
+      <div class="panel-heading">Index Barang                <a class="btn btn-primary" href="barang/create/1">Tambah Barang</a> <a class="btn btn-info" href="barang/allbarcode">Cetak Semua Barcode</a></div>
+        <div class="panel-body">
+  <table class="table table-hover table-striped table-bordered">
+  <tr>
+      <th>Kode Inventaris</th>
+    <th>Nama Barang</th>
+    <th>Merek</th>
+    <th>Tahun</th>
+    <th>Jumlah</th>
+     <th>Satuan</th>
+    <th>Rayon</th>
+    <th>Ruangan</th>
+    <th>Fisik</th>
+    <th>Keterangan</th>
+    <?php if(Auth::user()->role == 1 && Auth::user()->status_reg == 1): ?>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+<?php elseif(Auth::user()->role == 2 && Auth::user()->status_reg == 1): ?>
+    <th></th>
+ <?php else: ?>
+echo "akun anda belum dikonfirmasi";
+
+<?php endif; ?>
+  </tr>
+ 
+  <tr>
+
+    <?php foreach( $barang as $lala ): ?>
+    <?php foreach( $lala as $item ): ?>
+                <td>
+                    <?php echo e($item->nomor_inventaris); ?>
+
+                </td>
+                 
+                 <td>
+                    <?php echo e($item->nama_barang); ?>
+
+                 </td>
+
+               <!--  <td>
+              
+                   <img src="<?php echo e(URL::to(substr($item->gambar,0))); ?>" style="width:50%">
+                </td> -->
+                <td>
+                    <?php echo e($item->merek); ?>
+
+                </td>
+                  <td>
+                    <?php echo e($item->tahun); ?>
+
+                </td>
+                
+                <td>
+                    <?php echo e($item->jumlah); ?>
+
+                </td>
+                  <td>
+                    <?php echo e($item->satuan); ?>
+
+                </td>
+                 <td>
+                    <?php echo e($item->ruang->area->nama_area); ?>
+
+                </td>
+                <td>
+                    <?php echo e($item->ruang->nama_ruang); ?>
+
+                </td>
+                <td>
+                   <?php echo e($item->fisik); ?>
+
+                </td>
+                <td>
+                    <?php echo e($item->keterangan); ?>
+
+                </td>
+    <?php if(Auth::user()->role == 1 && Auth::user()->status_reg == 1): ?>
+    <td><a class="btn btn-success" href="barang/update/<?php echo e($item['id_barang']); ?>">Update</a></td>
+    <td><a class="btn btn-primary" href="barang/detail/<?php echo e($item['id_barang']); ?>">Detail</a></td>
+    <td><a class="btn btn-info" href="barang/barcode/<?php echo e($item['id_barang']); ?>">Barcode</a></td>
+    <td><a class="btn btn-danger" onClick="myFunction(<?php echo e($item['id_barang']); ?>)" >Hapus</a></td>
+    <td hidden><a class="btn btn-danger" id="<?php echo e($item['id_barang']); ?>" href="barang/delete/<?php echo e($item['id_barang']); ?>">Hapus</a></td>
+ 
+     <?php elseif(Auth::user()->role == 2 && Auth::user()->status_reg == 1): ?>
+       <td><a class="btn btn-primary" href="barang/detail/<?php echo e($item['id_barang']); ?>">Detail</a></td>
+      <?php else: ?>
+<script> window.location = "<?php echo e(url('/auth/logout')); ?>"; </script>
+
+<?php endif; ?>
+
+   </tr>
+
+    <?php endforeach; ?>
+
+
+
+
+  
+ 
+</table>
+ <?php echo $lala->render(); ?>
+    <?php endforeach; ?>
+
+
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<script>
+    $(".delete").on("submit", function(){
+        return confirm("Do you want to delete this item?");
+    });
+</script>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

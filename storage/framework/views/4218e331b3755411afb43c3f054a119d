@@ -1,0 +1,91 @@
+ 
+<?php $__env->startSection('content'); ?>
+
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Cari Permintaan Konfirmasi</div>
+        <div class="panel-body">
+
+
+
+
+
+       <?php echo Form::open(array('files'=>true,'action' => 'UserController@search') ); ?>
+
+        <div class="form-group">
+        <?php echo Form::label('nama', 'Nama ', array('class' => 'col-md-4 control-label')); ?>
+
+        <div class="col-md-6">
+        <?php echo Form::text('nama', null,array('class' => 'form-control')); ?></div>
+        </div><br/>
+        
+           
+
+            <div class="form-group"><br/> <br/>
+        <div class="col-md-6 col-md-offset-4">
+          <?php echo Form::submit('Cari ', ['class'=>'btn primary']); ?>
+
+        </div>
+          <?php echo Form::close(); ?>
+
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Permintaan Konfirmasi</div>
+        <div class="panel-body">
+ 
+       <table class="table table-hover table-striped">
+      <tr>
+      <th>Nama</th>
+    <th>Alamat</th>
+    <th>Id Pegawai</th>
+    <th>Telepon</th>
+    
+     <th>Foto</th>
+    <th></th>
+     <th></th>
+    
+    
+
+    
+        
+    
+  </tr>
+ 
+  <tr>
+  <?php foreach( $x as $akun ): ?>
+    <td><?php echo e($akun->name); ?></td>
+    <td><?php echo e($akun->alamat); ?></td>
+    <td><?php echo e($akun->id_pegawai); ?></td>
+    <td><?php echo e($akun->telepon); ?></td>
+    <td><img src="" width="50" height="50"></td>
+
+    
+
+    <td><a class="btn btn-primary" href="<?php echo e(url('/deleteconfirmrequest')); ?>/<?php echo e($akun->id); ?>">Hapus</a></td>
+    <td><a class="btn btn-success" href="<?php echo e(url('/confirm')); ?>/<?php echo e($akun->id); ?>">Konfirmasi</a></td>
+ 
+    
+    
+   </tr>
+    <?php endforeach; ?>
+ 
+
+</table>
+
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

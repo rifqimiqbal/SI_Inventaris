@@ -1,0 +1,188 @@
+ 
+<?php $__env->startSection('content'); ?>
+
+
+
+
+
+
+
+
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Tambah Aktiva</div>
+        <div class="panel-body">
+
+       
+
+		<?php echo Form::open( ['files'=>true]); ?>
+
+
+				              <div class="form-group">
+  <label class="col-md-4 control-label" >Rayon</label>
+  <div class="col-md-6">	
+				<select name='fid_area' onChange="doReload(this.value);" class="form-control">
+<!--  -->
+					<?php foreach($pilih as $terpilih): ?>
+					<option value="<?php echo e($terpilih->id_area); ?>" selected>
+						<?php echo e($terpilih->nama_area); ?>
+
+					</option>
+					<?php endforeach; ?>
+
+					<?php foreach($area as $item): ?>
+					<?php foreach($item as $item2): ?>
+					<?php
+					if($terpilih->id_area!=$item2->id_area){
+					?>
+					<option value="<?php echo e($item2->id_area); ?>">
+						<?php echo e($item2->nama_area); ?>
+
+					</option>
+					<?php
+					}	
+					?>
+					<?php endforeach; ?>
+					<?php endforeach; ?>
+				</div>
+</div> <br/> <br/><br/><br/> 
+
+<div class="form-group">
+  <label class="col-md-4 control-label" ></label>
+  <div class="col-md-6">
+  <select class="form-control" >
+    <option></option>
+    <option></option>
+  </select></div>
+</div> <br/> <br/>
+
+
+				<div class="form-group">
+  <label class="col-md-4 control-label" >Ruangan</label>
+   <div class="col-md-6">	
+					<select name='ruang'  class="form-control">
+							<?php foreach($ruang as $item3): ?>
+							<?php foreach($item3 as $item4): ?>
+						<option value="<?php echo e($item4->id_ruang); ?>">
+							<?php echo e($item4->nama_ruang); ?>
+
+						</option>
+						<?php endforeach; ?>
+						<?php endforeach; ?>
+					
+					
+				</div>
+</div> <br/> <br/>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" >Ruangan</label>
+  <div class="col-md-6">
+  <select class="form-control" >
+    <option></option>
+    <option></option>
+  </select></div>
+</div> <br/> <br/>
+
+
+	
+
+				<div class="form-group">
+ 				<?php echo Form::label('nama_barang', 'Nama Barang', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('nama_barang', null,array('class' => 'form-control')); ?></div>
+				</div><br/><br/> <br/>
+
+				<ul>
+					<li style="visibility:hidden">aaa</li>
+				</ul>
+
+				<div class="form-group">
+				<?php echo Form::label('merek', 'Merek', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('merek',null, array('class' => 'form-control')); ?>	</div>
+				</div><br/><br/> 
+
+				<ul>
+					<li style="visibility:hidden">aaa</li>
+				</ul>
+
+				<div class="form-group">
+				<?php echo Form::label('tahun', 'Tahun', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::input('number','tahun',null, array('class' => 'form-control')); ?>	</div>
+				</div><br/><br/> 
+
+				<ul>
+					<li style="visibility:hidden">aaa</li>
+				</ul>
+
+				<div class="form-group">
+ 				<?php echo Form::label('gambar', 'Gambar Barang', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+         		 <?php echo Form::file('gambar',['class' => 'form-control']); ?>
+
+
+	  			<p class="errors"><?php echo $errors->first('image'); ?></p>
+				
+				</div>
+     		   </div>
+
+ 
+     		   <ul>
+					<li style="visibility:hidden">aaa</li>
+				</ul>
+<ul>
+					<li style="visibility:hidden">aaa</li>
+				</ul>
+
+     		   <div class="form-group">
+ 				<?php echo Form::label('jumlah', 'Jumlah', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::input('number', 'jumlah',  1, array('class' => 'form-control')); ?>
+
+				</div>
+     		   </div><br/><br/> <br/>
+
+
+     		   <div class="form-group">
+				<?php echo Form::label('satuan', 'Satuan', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::select('satuan',['buah'=>'Buah','set'=>'Set','unit'=>'Unit'], array('class' => 'form-control')); ?>	</div>
+				</div><br/><br/> 
+
+
+
+     		   <div class="form-group">
+				<?php echo Form::label('fisik', 'Fisik', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::select('fisik',['baik'=>'Baik','kurang baik'=>'Kurang Baik','rusak'=>'Rusak'], array('class' => 'form-control')); ?>	</div>
+				</div><br/>
+
+
+				<div class="form-group">
+ 				<?php echo Form::label('keterangan', 'Keterangan', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::textarea('keterangan', null,array('class' => 'form-control'),''); ?></div>
+				</div><br/><br/> <br/> <br/><br/> <br/>
+
+
+     		    <div class="form-group"><br/> <br/>
+				<div class="col-md-6 col-md-offset-4"><br/> <br/>
+    			<?php echo Form::submit('Tambah Barang', ['class'=>'btn primary']); ?>
+
+				</div>
+    			<?php echo Form::close(); ?>
+
+    			</div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

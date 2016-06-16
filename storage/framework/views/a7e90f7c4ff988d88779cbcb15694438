@@ -1,0 +1,69 @@
+<h4 align="left">PT.PLN (Persero)
+<br>Distribusi Jawa Timur
+<br>AREA MADIUN</h4>
+
+
+<h2 align="center">Daftar Inventaris Rayon <?php echo e($ruang->area->nama_area); ?> Ruang <?php echo e($ruang->nama_ruang); ?>  </h2>
+
+
+ 
+<table border="1" align="center">
+  <tr>
+    <th>Kode Inventaris</th>
+    <th>Nama Barang</th>
+    <th>Merek</th>
+    <th>Tahun</th>
+    <th>Jumlah</th>
+     <th>Satuan</th>
+    <th>Fisik</th>
+    <th>Keterangan</th>
+  </tr>
+     <?php foreach($barang as $benda): ?>
+  <tr>
+
+
+
+   
+               <td>
+                  <?php echo e($benda->nomor_inventaris); ?>
+
+                </td>
+                 
+                 <td>
+                    <?php echo e($benda->nama_barang); ?>
+
+      
+                <td>
+                    <?php echo e($benda->merek); ?>
+
+                </td>
+                  <td>
+                    <?php echo e($benda->tahun); ?>
+
+                </td>
+                
+                <td>
+                    <?php echo e($benda->jumlah); ?>
+
+                </td>
+                  <td>
+                    <?php echo e($benda->satuan); ?>
+
+                </td>
+              
+                <td>
+                   <?php echo e($benda->fisik); ?>
+
+                </td>
+                <td>
+                    <?php echo e($benda->keterangan); ?>
+
+                </td>
+
+
+          </tr>
+
+    <?php endforeach; ?>
+  
+ 
+</table>

@@ -1,0 +1,91 @@
+ 
+<?php $__env->startSection('content'); ?>
+
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading"><?php echo e(Auth::user()->username); ?></div>
+        <div class="panel-body">
+
+
+
+
+
+
+		<?php echo Form::open(); ?>
+
+		        <div class="form-group">
+				<?php echo Form::label('id', 'Id Pegawai', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('id',Auth::user()->id_pegawai, array('class' => 'form-control', 'readonly'=>true)); ?>	</div>
+				</div><br/><br/> <br/> 
+				<div class="form-group">
+ 				<?php echo Form::label('nama', 'Nama Lengkap', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('nama', Auth::user()->name,array('class' => 'form-control', 'readonly'=>true)); ?></div>
+				</div><br/> 
+				<div class="form-group">
+				 
+				<div class="form-group">
+				<?php echo Form::label('alamat', 'Alamat', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('alamat',Auth::user()->alamat, array('class' => 'form-control', 'readonly'=>true)); ?>	</div>
+				</div><br/><br/> <br/>
+
+				
+
+				
+
+                 
+
+				<div class="form-group">
+ 				<?php echo Form::label('hp', 'Telepon/ No HP', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('hp',Auth::user()->telepon,array('class' => 'form-control', 'readonly'=>true)); ?></div>
+				</div><br/><br/> 
+
+				<div class="form-group">
+ 				<?php echo Form::label('email', 'Email', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('email', Auth::user()->email,array('class' => 'form-control', 'readonly'=>true)); ?></div>
+				</div><br/><br/>
+                 
+
+                 <div class="form-group">
+ 				<?php echo Form::label('jk', 'Email', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('jk',Auth::user()->jenis_kelamin ,array('class' => 'form-control', 'readonly'=>true)); ?></div>
+				</div><br/><br/>
+
+				<div class="form group">
+                <?php echo Form::label('foto', 'Foto Sekarang', array('class' => 'col-md-4 control-label')); ?>
+
+                <div class="col-md-6">
+                 <img src="<?php echo URL::to(substr(Auth::user()->foto,0)); ?>" width="100" height="100" style="margin-left:2%;width:30%">
+                    
+                </div>
+            </div><br/><br/> 
+            
+			     
+
+              
+
+
+
+				
+
+ 
+				
+
+     		    
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

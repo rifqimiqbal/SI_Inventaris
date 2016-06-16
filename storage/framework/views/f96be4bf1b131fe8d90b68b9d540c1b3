@@ -1,0 +1,549 @@
+        
+ 
+ 
+<?php $__env->startSection('content'); ?>
+
+   <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Cari Barang</div>
+        <div class="panel-body">
+
+    
+
+
+
+
+   <?php echo Form::open(array('action' => 'BarangController@search')); ?>
+
+<div class="form-group">
+        <?php echo Form::label('nama_barang', 'Nama Barang', array('class' => 'col-md-4 control-label')); ?>
+
+        <div class="col-md-6">
+        <?php echo Form::text('nama_barang',$seb['nama_barang'],array('class' => 'form-control')); ?></div>
+        </div><br/><br><br>
+        
+        <div class="form-group">
+        <?php echo Form::label('merek', 'Merek', array('class' => 'col-md-4 control-label')); ?>
+
+        <div class="col-md-6"><?php echo Form::text('merek',$seb['merek'], array('class' => 'form-control')); ?>  </div>
+        </div><br/><br><br>
+           
+        <div class="form-group">
+  <label class="col-md-4 control-label" >Rayon/Area</label>
+  <div class="col-md-6">  
+        <select name='area'  class="form-control">
+<!--  -->
+   
+          
+        <?php
+          if(empty($seb['area']))
+          {
+        ?>
+          <option value="">
+
+           </option>
+          <?php
+          }
+          ?>
+        <?php foreach($area as $zzz): ?>
+          <?php foreach($zzz as $barang2): ?>
+          <?php
+          if($seb['area']==$barang2->id_area)
+          { 
+          ?>
+          <option value="<?php echo e($barang2->id_area); ?>" selected>
+            <?php echo e($barang2->nama_area); ?>
+
+          </option>
+          <?php
+          }else{
+          ?>
+
+          <option value="<?php echo e($barang2->id_area); ?>">
+            <?php echo e($barang2->nama_area); ?>
+
+          </option>
+          <?php
+          }
+          ?>
+
+          <?php endforeach; ?>
+          <?php endforeach; ?>
+          
+          <option value="">
+           </option>
+          
+        </div>
+</div> <br/> <br/>
+
+<div class="form-group" hidden>
+  <label class="col-md-4 control-label" ></label>
+  <div class="col-md-6">
+  <select class="form-control" >
+    <option></option>
+    <option></option>
+  </select></div>
+</div> <br/> <br/>
+
+        <div class="form-group">
+  <label class="col-md-4 control-label" >Ruangan</label>
+  <div class="col-md-6">  
+
+          <select name='ruang'  class="form-control">
+            <?php
+          if(empty($seb['ruang']))
+          {
+        ?>
+          <option value="">
+
+           </option>
+          <?php
+          }
+          ?>
+        <?php foreach($ruang as $barang3): ?>
+          <?php foreach($barang3 as $barang4): ?>
+          <?php
+          if($seb['ruang']==$barang4->id_ruang)
+          { 
+          ?>
+          <option value="<?php echo e($barang4->id_ruang); ?>" selected>
+           <?php echo e($barang4->area->nama_area); ?> <?php echo "-" ?> <?php echo e($barang4->nama_ruang); ?>
+
+          </option>
+          <?php
+          }else{
+          ?>
+
+          <option value="<?php echo e($barang4->id_ruang); ?>">
+            <?php echo e($barang4->area->nama_area); ?> <?php echo "-" ?> <?php echo e($barang4->nama_ruang); ?>
+
+          </option>
+          <?php
+          }
+          ?>
+
+          <?php endforeach; ?>
+          <?php endforeach; ?>
+          
+           <option value="">
+           </option>
+        </div>
+</div> <br/> <br/><br><br>
+
+<div class="form-group" hidden>
+  <label class="col-md-4 control-label" ></label>
+  <div class="col-md-6">
+  <select class="form-control" >
+    <option></option>
+    <option></option>
+  </select></div>
+</div> <br/>
+
+
+
+            <div class="form-group"><br/> <br/>
+        <div class="col-md-6 col-md-offset-4">
+          <?php echo Form::submit('Cari ', ['class'=>'btn primary']); ?>
+
+        </div>
+          <?php echo Form::close(); ?>
+
+          </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 col-md-offset-0">
+      <div class="panel panel-default">
+        <div class="panel-heading">Hasil Pencarian Barang</div>
+        <div class="panel-body">
+      
+ 
+       <table class="table table-hover table-striped table-bordered">
+  <tr>
+      <th>Kode Inventaris</th>
+    <th>Nama Barang</th>
+    <th>Merek</th>
+    <th>Tahun</th>
+    <th>Jumlah</th>
+     <th>Satuan</th>
+    <th>Rayon</th>
+    <th>Ruangan</th>
+    <th>Fisik</th>
+    <th>Keterangan</th>
+<?php if(Auth::user()->role == 1 && Auth::user()->status_reg == 1): ?>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+<?php elseif(Auth::user()->role == 2 && Auth::user()->status_reg == 1): ?>
+    <th></th>
+ <?php else: ?>
+echo "akun anda belum dikonfirmasi";
+
+<?php endif; ?>
+  </tr>
+ 
+  <tr>
+    <?php foreach($barang as $wawa): ?>
+    <?php foreach( $wawa as $benda ): ?>
+
+
+    <td>
+              <?php echo e($benda->nomor_inventaris); ?>
+
+                </td>
+                 
+                 <td>
+                    <?php echo e($benda->nama_barang); ?>
+
+      
+                <td>
+                    <?php echo e($benda->merek); ?>
+
+                </td>
+                  <td>
+                    <?php echo e($benda->tahun); ?>
+
+                </td>
+                
+                <td>
+                    <?php echo e($benda->jumlah); ?>
+
+                </td>
+                  <td>
+                    <?php echo e($benda->satuan); ?>
+
+                </td>
+                 <td>
+                    <?php echo e($benda->ruang->area->nama_area); ?>
+
+                </td>
+                <td>
+                    <?php echo e($benda->ruang->nama_ruang); ?>
+
+                </td>
+                <td>
+                   <?php echo e($benda->fisik); ?>
+
+                </td>
+                <td>
+                    <?php echo e($benda->keterangan); ?>
+
+                </td>
+   <?php if(Auth::user()->role == 1 && Auth::user()->status_reg == 1): ?>
+    <td><a class="btn btn-success" href="update/<?php echo e($benda->id_barang); ?>">Update</a></td>
+    <td><a class="btn btn-primary" href="detail/<?php echo e($benda->id_barang); ?>">Detail</a></td>
+    <td><a class="btn btn-info" href="barcode/<?php echo e($benda->id_barang); ?>">Barcode</a></td>
+    <td><a class="btn btn-danger" onClick="myFunction(<?php echo e($benda['id_barang']); ?>)" >Hapus</a></td>
+    <td hidden><a class="btn btn-danger" id="<?php echo e($benda['id_barang']); ?>" href="delete/<?php echo e($benda['id_barang']); ?>">Hapus</a></td>
+     <?php elseif(Auth::user()->role == 2 && Auth::user()->status_reg == 1): ?>
+       <td><a class="btn btn-primary" href="detail/<?php echo e($benda->id_barang); ?>">Detail</a></td>
+      <?php else: ?>
+<script> window.location = "<?php echo e(url('/auth/logout')); ?>"; </script>
+
+<?php endif; ?>
+
+</tr>
+    <?php endforeach; ?>
+    <?php endforeach; ?>
+  
+ 
+</table>
+<?php echo Form::open(array('action' => 'BarangController@forprint')); ?>
+
+<div class="form-group" hidden>
+        <?php echo Form::label('nama_barang', 'Nama Barang', array('class' => 'col-md-4 control-label')); ?>
+
+        <div class="col-md-6">
+        <?php echo Form::text('nama_barang',$seb['nama_barang'],array('class' => 'form-control')); ?></div>
+        </div>
+        
+        <div class="form-group" hidden>
+        <?php echo Form::label('merek', 'Merek', array('class' => 'col-md-4 control-label')); ?>
+
+        <div class="col-md-6"><?php echo Form::text('merek',$seb['merek'], array('class' => 'form-control')); ?>  </div>
+        </div>
+           
+        <div class="form-group" hidden>
+  <label class="col-md-4 control-label" >Rayon/Area</label>
+  <div class="col-md-6" hidden>  
+        <select name='area'  class="form-control">
+<!--  -->
+   
+          
+        <?php
+          if(empty($seb['area']))
+          {
+        ?>
+          <option value="">
+
+           </option>
+          <?php
+          }
+          ?>
+        <?php foreach($area as $zzz): ?>
+          <?php foreach($zzz as $barang2): ?>
+          <?php
+          if($seb['area']==$barang2->id_area)
+          { 
+          ?>
+          <option value="<?php echo e($barang2->id_area); ?>" selected>
+            <?php echo e($barang2->nama_area); ?>
+
+          </option>
+          <?php
+          }else{
+          ?>
+
+          <option value="<?php echo e($barang2->id_area); ?>">
+            <?php echo e($barang2->nama_area); ?>
+
+          </option>
+          <?php
+          }
+          ?>
+
+          <?php endforeach; ?>
+          <?php endforeach; ?>
+          
+        
+          
+        </div>
+</div> 
+
+<div class="form-group" hidden>
+  <label class="col-md-4 control-label" ></label>
+  <div class="col-md-6" hidden>
+  <select class="form-control" >
+    <option></option>
+    <option></option>
+  </select></div>
+</div> 
+
+        <div class="form-group" hidden>
+  <label class="col-md-4 control-label" >Ruangan</label>
+  <div class="col-md-6" hidden>  
+
+          <select name='ruang'  class="form-control">
+             <?php
+          if(empty($seb['ruang']))
+          {
+        ?>
+          <option value="">
+
+           </option>
+          <?php
+          }
+          ?>
+        <?php foreach($ruang as $barang3): ?>
+          <?php foreach($barang3 as $barang4): ?>
+          <?php
+          if($seb['ruang']==$barang4->id_ruang)
+          { 
+          ?>
+          <option value="<?php echo e($barang4->id_ruang); ?>" selected>
+            <?php echo e($barang4->nama_ruang); ?>
+
+          </option>
+          <?php
+          }else{
+          ?>
+
+          <option value="<?php echo e($barang4->id_ruang); ?>">
+            <?php echo e($barang4->nama_ruang); ?>
+
+          </option>
+          <?php
+          }
+          ?>
+
+          <?php endforeach; ?>
+          <?php endforeach; ?>
+          
+          
+        </div>
+</div> 
+
+<div class="form-group" hidden>
+  <label class="col-md-4 control-label" ></label>
+  <div class="col-md-6" hidden>
+  <select class="form-control" >
+    <option></option>
+    <option></option>
+  </select></div>
+</div>
+            <div class="form-group" >
+        <div>
+          <?php echo Form::submit('PDF', ['class'=>'btn-danger']); ?>
+
+        </div>
+          <?php echo Form::close(); ?>
+
+
+          </div>
+          <?php echo Form::open(array('action' => 'BarangController@forexcel')); ?>
+
+<div class="form-group" hidden>
+        <?php echo Form::label('nama_barang', 'Nama Barang', array('class' => 'col-md-4 control-label')); ?>
+
+        <div class="col-md-6">
+        <?php echo Form::text('nama_barang',$seb['nama_barang'],array('class' => 'form-control')); ?></div>
+        </div>
+        
+        <div class="form-group" hidden>
+        <?php echo Form::label('merek', 'Merek', array('class' => 'col-md-4 control-label')); ?>
+
+        <div class="col-md-6"><?php echo Form::text('merek',$seb['merek'], array('class' => 'form-control')); ?>  </div>
+        </div>
+           
+        <div class="form-group" hidden>
+  <label class="col-md-4 control-label" >Rayon/Area</label>
+  <div class="col-md-6" hidden>  
+        <select name='area'  class="form-control">
+<!--  -->
+   
+          
+        <?php
+          if(empty($seb['area']))
+          {
+        ?>
+          <option value="">
+
+           </option>
+          <?php
+          }
+          ?>
+        <?php foreach($area as $zzz): ?>
+          <?php foreach($zzz as $barang2): ?>
+          <?php
+          if($seb['area']==$barang2->id_area)
+          { 
+          ?>
+          <option value="<?php echo e($barang2->id_area); ?>" selected>
+            <?php echo e($barang2->nama_area); ?>
+
+          </option>
+          <?php
+          }else{
+          ?>
+
+          <option value="<?php echo e($barang2->id_area); ?>">
+            <?php echo e($barang2->nama_area); ?>
+
+          </option>
+          <?php
+          }
+          ?>
+
+          <?php endforeach; ?>
+          <?php endforeach; ?>
+          
+        
+          
+        </div>
+</div> 
+
+<div class="form-group" hidden>
+  <label class="col-md-4 control-label" ></label>
+  <div class="col-md-6" hidden>
+  <select class="form-control" >
+    <option></option>
+    <option></option>
+  </select></div>
+</div> 
+
+        <div class="form-group" hidden>
+  <label class="col-md-4 control-label" >Ruangan</label>
+  <div class="col-md-6" hidden>  
+
+          <select name='ruang'  class="form-control">
+             <?php
+          if(empty($seb['ruang']))
+          {
+        ?>
+          <option value="">
+
+           </option>
+          <?php
+          }
+          ?>
+        <?php foreach($ruang as $barang3): ?>
+          <?php foreach($barang3 as $barang4): ?>
+          <?php
+          if($seb['ruang']==$barang4->id_ruang)
+          { 
+          ?>
+          <option value="<?php echo e($barang4->id_ruang); ?>" selected>
+            <?php echo e($barang4->nama_ruang); ?>
+
+          </option>
+          <?php
+          }else{
+          ?>
+
+          <option value="<?php echo e($barang4->id_ruang); ?>">
+            <?php echo e($barang4->nama_ruang); ?>
+
+          </option>
+          <?php
+          }
+          ?>
+
+          <?php endforeach; ?>
+          <?php endforeach; ?>
+          
+          
+        </div>
+</div> 
+
+<div class="form-group" hidden>
+  <label class="col-md-4 control-label" ></label>
+  <div class="col-md-6" hidden>
+  <select class="form-control" >
+    <option></option>
+    <option></option>
+  </select></div>
+</div>
+            <div class="form-group" >
+        <div>
+          <?php echo Form::submit('Excel ', ['class'=>'btn-success']); ?>
+
+        </div>
+          <?php echo Form::close(); ?>
+
+          </div>
+      </div>
+    </div>
+</div>
+      </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<?php $__env->stopSection(); ?>
+
+    
+
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

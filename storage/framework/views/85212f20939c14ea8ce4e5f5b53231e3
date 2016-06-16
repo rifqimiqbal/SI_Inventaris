@@ -1,0 +1,127 @@
+<h4 align="left">PT.PLN (Persero)
+<br>Distribusi Jawa Timur
+<br>AREA MADIUN</h4>
+
+
+
+
+<h2 align="center">Daftar Inventaris 
+    <?php
+    $flag=0;
+  if(!empty($seb['area']))
+  { $flag=1;
+  ?>
+  <?php foreach($area as $areas): ?>
+  Rayon <?php echo e($areas->nama_area); ?>
+
+  <?php endforeach; ?>
+  <?php
+  }
+  if(!empty($seb['ruang']))
+  {
+
+  ?>
+  <?php foreach($ruang as $ruangs): ?>
+  Ruang <?php echo e($ruangs->nama_ruang); ?>
+
+  <?php endforeach; ?>
+  <?php
+  }
+  ?>
+  <?php
+  if(!empty($seb['nama_barang']))
+  {
+  ?>
+  nama barang "<?php echo e($seb['nama_barang']); ?>"
+  <?php
+  }
+  ?>
+    <?php
+  if(!empty($seb['merek']))
+  {
+  ?>
+  merek "<?php echo e($seb['merek']); ?>"
+  <?php
+  }
+  ?>
+</h2>
+<?php
+$counter=1;
+?>
+
+
+<table border="1" >
+  <tr>
+    <th>No.</th>
+    <th>Nama Barang</th>
+    <th>Merek</th>
+    <th>Tahun</th>
+    <th>Kode Inventaris</th>
+    <th>Jum<br>lah</th>
+     <th>Satuan</th>
+    <th>Rayon</th>
+    <th>Ruangan</th>
+    <th>Fisik</th>
+    <th>Ket</th>
+  </tr>
+       <?php foreach($barang as $lala): ?>
+     <?php foreach($lala as $benda): ?>
+  <tr>
+
+
+
+                <td>
+                  <?php echo $counter;
+                  $counter=$counter+1;
+                  ?>
+                </td>
+             
+                 
+                 <td>
+                    <?php echo e($benda->nama_barang); ?>
+
+      
+                <td>
+                    <?php echo e($benda->merek); ?>
+
+                </td>
+                  <td>
+                    <?php echo e($benda->tahun); ?>
+
+                </td>
+                  <td>
+                  <?php echo e($benda->nomor_inventaris); ?>
+
+                </td>
+                <td>
+                    <?php echo e($benda->jumlah); ?>
+
+                </td>
+                  <td>
+                    <?php echo e($benda->satuan); ?>
+
+                </td>
+                 <td>
+                    <?php echo e($benda->ruang->area->nama_area); ?>
+
+                </td>
+                <td>
+                    <?php echo e($benda->ruang->nama_ruang); ?>
+
+                </td>
+                <td>
+                   <?php echo e($benda->fisik); ?>
+
+                </td>
+               <td>
+                   <?php echo e($benda->keterangan); ?>
+
+                </td>
+
+
+          </tr>
+
+    <?php endforeach; ?>
+  <?php endforeach; ?>
+ 
+</table>

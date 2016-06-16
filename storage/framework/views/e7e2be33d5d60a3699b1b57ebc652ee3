@@ -1,0 +1,72 @@
+    
+ 
+ 
+<?php $__env->startSection('content'); ?>
+
+ 
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Daftar Ruangan</div>
+        <div class="panel-body">
+ 
+       <table class="table table-hover table-striped table-bordered">
+  <tr>
+      <th>Kode Ruangan</th>
+    <th>Nama Ruangan</th>
+    
+    <th>Rayon</th>
+     <?php if(Auth::user()->role == 1 && Auth::user()->status_reg == 1): ?>
+    <th></th>
+    <th></th>  
+    <th></th>
+   <?php elseif(Auth::user()->role == 2 && Auth::user()->status_reg == 1): ?>
+    <th></th>
+  <?php else: ?>
+   echo "akun anda belum dikonfirmasi";
+
+    <?php endif; ?>
+    
+        
+    
+  </tr>
+ 
+  <tr>
+    <?php foreach( $ruang as $item ): ?>
+    <td><?php echo e($item->kode_ruang); ?></td>
+    <td><?php echo e($item->nama_ruang); ?></td>
+  
+    <td><?php echo e($item->area->nama_area); ?></td>
+    
+
+ <?php if(Auth::user()->role == 1 && Auth::user()->status_reg == 1): ?>
+    <td><a class="btn btn-success" href="ruang/update/<?php echo e($item['id_ruang']); ?>">Update</a></td>
+    <td><a class="btn btn-primary" href="ruang/detail/<?php echo e($item['id_ruang']); ?>">Detail</a></td>
+    <td><a class="btn btn-danger" onClick="myFunction(<?php echo e($item['id_ruang']); ?>)" >Hapus</a></td>
+    <td hidden><a class="btn btn-danger" id="<?php echo e($item['id_ruang']); ?>" href="ruang/delete/<?php echo e($item['id_ruang']); ?>">Hapus</a></td>
+   <?php elseif(Auth::user()->role == 2 && Auth::user()->status_reg == 1): ?>
+   <td><a class="btn btn-primary" href="ruang/detail/<?php echo e($item['id_ruang']); ?>">Detail</a></td>
+
+   <?php else: ?>
+   <script> window.location = "<?php echo e(url('/auth/logout')); ?>"; </script>
+
+    <?php endif; ?>
+   </tr>
+    <?php endforeach; ?>
+
+
+
+  
+ 
+</table>
+ <?php echo $ruang->render(); ?>
+
+<p><a class="btn btn-default" href="ruang/create">Tambah Ruangan</a></p>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

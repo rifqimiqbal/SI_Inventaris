@@ -1,0 +1,15 @@
+<?php
+$counter=0;
+?>
+<?php foreach($barang as $item): ?>
+
+<?php
+echo $codbar[$counter];
+$counter=$counter+1;
+?>
+
+<?php echo e($item->nomor_inventaris); ?>
+
+<br>
+<br>
+<?php endforeach; ?>

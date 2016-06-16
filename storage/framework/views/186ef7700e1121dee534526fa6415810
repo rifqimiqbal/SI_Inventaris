@@ -1,0 +1,7 @@
+<?php
+echo $codbar;
+?>
+<br>
+<?php echo e($barang->nomor_inventaris); ?>
+
+<br>

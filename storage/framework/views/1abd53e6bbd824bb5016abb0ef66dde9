@@ -1,0 +1,156 @@
+ 
+<?php $__env->startSection('content'); ?>
+
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Detail Ruangan</div>
+        <div class="panel-body">
+
+                
+		<?php echo Form::open( ); ?>
+
+
+        <div class="form-group">
+ 				<?php echo Form::label('nama_ruang', 'Nama Ruangan', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('nama_ruang', $ruang->nama_ruang,array('class' => 'form-control','readonly' => true)); ?></div>
+				</div><br/><br/> <br/>
+
+        <div class="form-group">
+        <?php echo Form::label('kode_ruang', 'Kode Ruangan', array('class' => 'col-md-4 control-label')); ?>
+
+        <div class="col-md-6"><?php echo Form::text('kode_ruang',$ruang->kode_ruang, array('class' => 'form-control','readonly' => true)); ?>  </div>
+        </div><br/><br/>
+
+				<div class="form-group">
+				<?php echo Form::label('area', 'Rayon/Area', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('area',$ruang->area->nama_area, array('class' => 'form-control','readonly' => true)); ?>	</div>
+				</div><br/><br/> 
+
+				
+
+
+              <div class="form group">
+                <?php echo Form::label('foto', 'Gambar', array('class' => 'col-md-4 control-label')); ?>
+
+                <div class="col-md-6">
+                    <?php
+                  if(empty($ruang->foto))
+                  {
+                   ?>
+                  <img src="../../imgbarang/default.jpg" width="auto" height="auto">
+                    
+                    <?php
+                  }
+                    ?>
+                    <?php
+                    if(!empty($ruang->foto))
+                    {
+                    ?>
+                    <img src="<?php echo e(URL::to(substr($ruang->foto,0))); ?>" width="auto" height="auto">
+                    <?php
+                  }
+                    ?>
+                    
+                </div>
+            </div><br/><br/> 
+
+           
+                 
+     		    <div class="form-group"><br/> <br/>
+				<div class="col-md-6 col-md-offset-4"><br/> <br/>
+					<a class="btn btn-default" href="../../ruang">Kembali</a>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+   <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">List Barang di Ruang <?php echo e($ruang->nama_ruang); ?><?php echo " " ?><?php echo e($ruang->area->nama_area); ?></div>
+        <div class="panel-body">
+ 
+       <table class="table table-hover table-striped table-bordered">
+  <tr>
+      <th>Kode Inventaris</th>
+    <th>Nama Barang</th>
+    <th>Merek</th>
+    <th>Tahun</th>
+    <th>Jumlah</th>
+     <th>Satuan</th>
+   
+    <th>Fisik</th>
+    <th>Keterangan</th>
+  </tr>
+ <?php foreach( $barang as $item ): ?>
+  <tr >
+    
+                <td >
+                    <?php echo e($item->nomor_inventaris); ?>
+
+                </td>
+                 
+                 <td>
+                    <a href="../../barang/detail/<?php echo e($item->id_barang); ?>"><?php echo e($item->nama_barang); ?> </a>
+                 </td>
+
+               <!--  <td>
+              
+                   <img src="<?php echo e(URL::to(substr($item->gambar,0))); ?>" style="width:50%">
+                </td> -->
+                <td>
+                 <?php echo e($item->merek); ?> 
+                </td>
+                  <td>
+                 <?php echo e($item->tahun); ?> 
+                </td>
+                </td>
+                
+                <td>
+                  <?php echo e($item->jumlah); ?>
+
+                </td>
+                  <td>
+                  <?php echo e($item->satuan); ?>
+
+                </td>
+                </td>
+                 
+                <td>
+              <?php echo e($item->fisik); ?>
+
+                </td>
+                </td>
+                <td>
+          <?php echo e($item->keterangan); ?>
+
+                </td>
+                </td>
+  
+     
+   </tr>
+    <?php endforeach; ?>
+   
+
+
+
+  
+ 
+</table>
+<p><a class="btn btn-danger" href="../../ruang/forprint/<?php echo e($ruang->id_ruang); ?>">PDF</a></p>
+<p><a class="btn btn-success" href="../../ruang/cetakexcel/<?php echo e($ruang->id_ruang); ?>">Excel</a></p>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

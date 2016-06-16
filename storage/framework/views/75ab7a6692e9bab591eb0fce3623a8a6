@@ -1,0 +1,94 @@
+ 
+<?php $__env->startSection('content'); ?>
+
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Edit Rayon</div>
+        <div class="panel-body">
+
+
+
+
+
+
+		<?php echo Form::open( ['class' => 'area','files'=>true]); ?>
+
+				<div class="form-group">
+ 				<?php echo Form::label('nama_area', 'Nama Area/Rayon', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('nama_area', $area->nama_area,array('class' => 'form-control')); ?></div>
+				</div><br/><br/> <br/>
+				<div class="form-group">
+				<?php echo Form::label('alamat', 'Alamat', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('alamat',$area->alamat, array('class' => 'form-control')); ?>	</div>
+				</div><br/><br/> 
+
+				<div class="form-group">
+				<?php echo Form::label('kode_area', 'Kode Area', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('kode_area',$area->kode_area, array('class' => 'form-control')); ?>	</div>
+				</div><br/><br/> 
+
+				<div class="form-group">
+				<?php echo Form::label('telepon', 'Telepon', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('telepon',$area->telepon, array('class' => 'form-control')); ?>	</div>
+				</div><br/><br/>
+
+
+				
+				
+				<div class="form-group">
+ 				<?php echo Form::label('gambar', 'Foto', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+         		 <?php echo Form::file('gambar',['class' => 'btn']); ?>
+
+	  			<p class="errors"><?php echo $errors->first('image'); ?></p>
+				
+				</div>
+     		   </div>
+
+     		   <div class="form group" align="center">
+      
+                <div class="col-md-10" align="center">
+            		 <?php
+                  if(empty($area->foto))
+                  {
+                   ?>
+                  <img src="../../imgbarang/default.jpg" width="auto" height="auto">
+                    
+                    <?php
+                  }
+                    ?>
+                    <?php
+                    if(!empty($area->foto))
+                    {
+                    ?>
+                    <img src="<?php echo e(URL::to(substr($area->foto,0))); ?>" width="auto" height="auto">
+                    <?php
+                  }
+                    ?>
+                    
+                </div>
+                </div><br/><br/> 
+
+
+     		    <div class="form-group"><br/> <br/>
+				<div class="col-md-6 col-md-offset-4"><br/> <br/>
+    			<?php echo Form::submit('Ubah', ['class'=>'btn primary']); ?>
+
+				</div>
+    			<?php echo Form::close(); ?>
+
+    			</div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,65 @@
+ 
+<?php $__env->startSection('content'); ?>
+
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Tambah Area/Rayon</div>
+        <div class="panel-body">
+
+
+
+
+
+
+		<?php echo Form::open( ); ?>
+
+				<div class="form-group">
+ 				<?php echo Form::label('nama_area', 'Nama Area/Rayon', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('nama_area', null,array('class' => 'form-control')); ?></div>
+				</div><br/><br/> <br/>
+				<div class="form-group">
+				<?php echo Form::label('alamat', 'Alamat', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('alamat',null, array('class' => 'form-control')); ?>	</div>
+				</div><br/><br/> 
+				<?php echo Form::label('kode_area', 'Kode Area (3 karakter, ex: Caruban: CRB)', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('kode_area',null, array('class' => 'form-control')); ?>	</div>
+				</div><br/><br/> 
+
+				<div class="form-group">
+				<?php echo Form::label('telp', 'Telepon', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('telepon',null, array('class' => 'form-control')); ?>	</div>
+				</div><br/><br/>
+				
+				<div class="form-group">
+ 				<?php echo Form::label('gambar', 'Foto', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+         		 <?php echo Form::file('gambar',['class' => 'btn']); ?>
+
+	  			<p class="errors"><?php echo $errors->first('image'); ?></p>
+				
+				</div>
+     		   </div>
+
+
+     		    <div class="form-group"><br/> <br/>
+				<div class="col-md-6 col-md-offset-4"><br/> <br/>
+    			<?php echo Form::submit('Tambahkan', ['class'=>'btn primary']); ?>
+
+				</div>
+    			<?php echo Form::close(); ?>
+
+    			</div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

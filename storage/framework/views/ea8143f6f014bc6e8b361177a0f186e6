@@ -1,0 +1,81 @@
+ 
+<?php $__env->startSection('content'); ?>
+
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Ubah Akun</div>
+        <div class="panel-body">
+
+
+
+
+         <?php foreach($x as $akun): ?>
+		<?php echo Form::open(array('files'=>true,'action' => 'UserController@update') ); ?>
+
+		
+		        <div class="form-group">
+				<?php echo Form::label('id', 'Id Pegawai', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('id',$akun->id_pegawai, array('class' => 'form-control','readonly'=> true)); ?>	</div>
+				</div><br/><br/><br/>
+				<div class="form-group">
+ 				<?php echo Form::label('nama', 'Nama Lengkap', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('nama', $akun->name,array('class' => 'form-control')); ?></div>
+				</div><br/><br/> 
+				<div class="form-group">
+				<?php echo Form::label('username', 'Nama Pengguna/Username', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('username',$akun->username, array('class' => 'form-control','readonly'=> true)); ?>	</div>
+				</div><br/><br/> 
+				<div class="form-group">
+				<?php echo Form::label('alamat', 'Alamat', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6"><?php echo Form::text('alamat',$akun->alamat, array('class' => 'form-control')); ?>	</div>
+				</div><br/><br/> 
+
+				
+
+				
+
+                 
+
+				<div class="form-group">
+ 				<?php echo Form::label('hp', 'Telepon/ No HP', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('hp',$akun->telepon,array('class' => 'form-control')); ?></div>
+				</div><br/><br/> 
+
+				<div class="form-group">
+ 				<?php echo Form::label('email', 'Email', array('class' => 'col-md-4 control-label')); ?>
+
+				<div class="col-md-6">
+				<?php echo Form::text('email', $akun->email,array('class' => 'form-control','readonly'=> true)); ?></div>
+				</div><br/><br/>
+
+			       
+
+
+
+ 
+				
+
+     		    <div class="form-group"><br/> <br/>
+				<div class="col-md-6 col-md-offset-4"><br/> <br/>
+    			<?php echo Form::submit('Ubah', ['class'=>'btn primary']); ?>
+
+				</div>
+    			<?php echo Form::close(); ?>
+
+    			<?php endforeach; ?>
+    			</div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,34 @@
+ 
+<?php $__env->startSection('content'); ?>
+
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Welcome <?php echo e(Auth::user()->username); ?> !!</div>
+        <div class="panel-body">
+
+                
+<?php if(Auth::user()->role == 1 && Auth::user()->status_reg == 1): ?>
+<a href="<?php echo e(url('/detailakun')); ?>" class="btn btn-primary btn-lg btn-block">Akun </a>
+<a href="<?php echo e(url('/area')); ?>" class="btn btn-default btn-lg btn-block">Rayon/Area</a>
+<a href="<?php echo e(url('/barang')); ?>" class="btn btn-primary btn-lg btn-block">Inventaris</a>
+<a href="<?php echo e(url('/confirmrequest')); ?>" class="btn btn-default btn-lg btn-block">Permintaan Konfirmasi</a>
+<a href="<?php echo e(url('/ruang')); ?>" class="btn btn-primary btn-lg btn-block">Ruangan</a>
+<?php elseif(Auth::user()->role == 2 && Auth::user()->status_reg == 1): ?>
+<a href="<?php echo e(url('/detailakun')); ?>"  class="btn btn-primary btn-lg btn-block">Akun </a>
+<a href="<?php echo e(url('/area')); ?>"  class="btn btn-default btn-lg btn-block">Rayon/Area</a>
+<a href="<?php echo e(url('/barang')); ?>"  class="btn btn-primary btn-lg btn-block">Inventaris</a>
+
+<a href="<?php echo e(url('/ruang')); ?>"  class="btn btn-default btn-lg btn-block">Ruangan</a>
+<?php else: ?>
+<script> window.location = "<?php echo e(url('/auth/logout')); ?>"; </script>
+
+<?php endif; ?>
+
+      </div>
+    </div>
+  </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
