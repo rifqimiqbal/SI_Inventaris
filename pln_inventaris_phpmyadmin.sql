@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2016 at 10:11 PM
+-- Generation Time: Jun 17, 2016 at 04:35 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.3
 
@@ -91,17 +91,18 @@ CREATE TABLE `area` (
   `telepon` varchar(15) DEFAULT NULL,
   `foto` varchar(20) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  `kode_area` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `area`
 --
 
-INSERT INTO `area` (`id_area`, `nama_area`, `alamat`, `telepon`, `foto`, `updated_at`, `created_at`) VALUES
-(1, 'Madiun Kota', 'M  Haryono', '0834920123', 'imgarea/68489.jpg', '2016-06-07 19:23:02', NULL),
-(3, 'Caruban', 'Jln Thamrin', '084239123', NULL, NULL, NULL),
-(4, 'New York', 'Jln New York', '0980892341', NULL, NULL, NULL);
+INSERT INTO `area` (`id_area`, `nama_area`, `alamat`, `telepon`, `foto`, `updated_at`, `created_at`, `kode_area`) VALUES
+(1, 'Madiun Kota', 'M  Haryono', '0834920123', 'imgarea/68489.jpg', '2016-06-07 19:23:02', NULL, 'MDN'),
+(3, 'Caruban', 'Jln Thamrin', '084239123', NULL, NULL, NULL, 'CRB'),
+(5, 'Magetan', 'Jln Magetan', '031234321', NULL, NULL, NULL, 'MGT');
 
 -- --------------------------------------------------------
 
@@ -122,22 +123,31 @@ CREATE TABLE `barang` (
   `fid_ruang` int(11) DEFAULT NULL,
   `gambar` varchar(50) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  `fid_area` int(11) DEFAULT NULL,
+  `noperarea` int(11) DEFAULT NULL,
+  `narea` varchar(20) DEFAULT NULL,
+  `nruang` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id_barang`, `nama_barang`, `merek`, `tahun`, `nomor_inventaris`, `jumlah`, `satuan`, `fisik`, `keterangan`, `fid_ruang`, `gambar`, `updated_at`, `created_at`) VALUES
-(1, 'OHP dengan Layar', '3 M', 2004, '210/UAD/CRB/04', 3, 'buah', 'baik', 'sfsdfdsfsd', 1, NULL, '2016-06-07 01:28:04', NULL),
-(9, 'abc', 'aaaaa', 2313, NULL, 1, 'set', 'baik', 'aaaaa', 3, NULL, '2016-06-08 10:01:09', NULL),
-(10, 'bbbbbbbb', 'sdddddd', 2313, NULL, 555, 'unit', 'baik', '', 1, NULL, NULL, NULL),
-(12, 'vvvvvv', '3324', 12323, NULL, 123123, 'set', 'rusak', '21321312', 5, NULL, NULL, NULL),
-(14, 'ffd', 'fdsfsf', 2147483647, NULL, 21313, 'set', 'kurang baik', 'good', 4, 'imgbarang/64008.png', '2016-06-07 09:30:04', NULL),
-(15, 'Sandal', 'Swallow', 2016, NULL, 1, 'buah', 'baik', 'nyaman', 1, 'imgbarang/46571.png', NULL, NULL),
-(16, 'Komputer', 'Alienware', 2016, NULL, 4, 'unit', 'baik', 'Test', 3, NULL, NULL, NULL),
-(18, 'sdfds', 'dsfsdfa', 2313, NULL, 1, 'buah', 'rusak', '', 5, NULL, NULL, NULL);
+INSERT INTO `barang` (`id_barang`, `nama_barang`, `merek`, `tahun`, `nomor_inventaris`, `jumlah`, `satuan`, `fisik`, `keterangan`, `fid_ruang`, `gambar`, `updated_at`, `created_at`, `fid_area`, `noperarea`, `narea`, `nruang`) VALUES
+(34, 'Kursi Kerja Putar P Lengan', 'Brother', 2003, '0001/MGR/MDN/03', 1, 'buah', 'baik', '', 7, NULL, NULL, NULL, 1, 1, NULL, NULL),
+(35, 'Telephone', 'Tens', 2005, '0001/MGR/CRB/05', 1, 'buah', 'baik', '', 9, NULL, '2016-06-15 07:33:47', NULL, 3, 1, NULL, NULL),
+(36, 'Kursi Kerja Putar P Lengan', 'Brother', 2003, '0001/MGR/MGT/03', 1, 'buah', 'baik', '', 10, NULL, NULL, NULL, 5, 1, NULL, NULL),
+(37, 'Apar Powder 5 Kg', 'Wormald', 2002, '0002/UAD/MDN/02', 1, 'buah', 'baik', '', 11, NULL, '2016-06-15 09:36:16', NULL, 1, 2, NULL, NULL),
+(38, 'Sofa Tamu', 'Ikea', 2003, '0003/AUL/MDN/03', 1, 'set', 'baik', '', 1, NULL, NULL, NULL, 1, 3, NULL, NULL),
+(39, 'Credensa 3 Pintu', 'Vinociti', 2004, '0004/MGR/MDN/04', 1, 'buah', 'baik', '', 7, NULL, NULL, NULL, 1, 4, NULL, NULL),
+(41, 'Credensa 3 Pintu', 'Vinociti', 2004, '0002/UAD/CRB/04', 1, 'buah', 'baik', '', 12, NULL, NULL, NULL, 3, 2, NULL, NULL),
+(42, 'Apar BCF 4,5 Kg', '', 2004, '0005/MGR/MDN/04', 1, 'buah', 'baik', '', 7, NULL, NULL, NULL, 1, 5, NULL, NULL),
+(43, 'Almari', 'Data Scrip', 2004, '0002/UAD/MGT/04', 1, 'buah', 'baik', '', 13, NULL, NULL, NULL, 5, 2, NULL, NULL),
+(44, 'Kaca Cermin', 'Alumunium', 2004, '0003/GDG/MGT/04', 1, 'buah', 'baik', '', 14, NULL, NULL, NULL, 5, 3, NULL, NULL),
+(45, 'Mesin Hitung Listrik', 'Casio', 2004, '0006/UAD/MDN/04', 1, 'buah', 'baik', '', 11, NULL, NULL, NULL, 1, 6, NULL, NULL),
+(46, 'OHP / Layar', '3 M', 2004, '0007/UAD/MDN/04', 1, 'buah', 'baik', '', 11, NULL, NULL, NULL, 1, 7, NULL, NULL),
+(47, 'Proyektor', 'Sony', 2012, '0008/AUL/MDN/12', 1, 'buah', 'baik', '', 1, NULL, '2016-06-15 18:56:08', NULL, 1, 8, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -170,14 +180,6 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `password_resets`
---
-
-INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('rifqi_maula@yahoo.com', 'aa3b397a346e80e6ad57b239a62b26a765e2ed6744a101ad240f5515a93ee3a0', '2016-06-13 19:36:53'),
-('rifqimaulaiqbal@gmail.com', 'e6958253c66b610a88104ad436f5a0bc6d8f96e647600fec5dcbb95ff8a6b497', '2016-06-13 19:55:55');
-
 -- --------------------------------------------------------
 
 --
@@ -190,20 +192,26 @@ CREATE TABLE `ruang` (
   `fid_area` int(11) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `foto` varchar(20) DEFAULT NULL
+  `foto` varchar(20) DEFAULT NULL,
+  `kode_ruang` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ruang`
 --
 
-INSERT INTO `ruang` (`id_ruang`, `nama_ruang`, `fid_area`, `updated_at`, `created_at`, `foto`) VALUES
-(1, 'Aula', 1, NULL, NULL, NULL),
-(2, 'Diskusi', 4, NULL, NULL, 'imgruang/49704.jpg'),
-(3, 'Kerja', 1, NULL, NULL, NULL),
-(4, 'Gudang', 1, NULL, NULL, NULL),
-(5, 'Gudangan', 3, '2016-06-08 10:14:12', NULL, NULL),
-(6, 'ccsdcsd', 3, NULL, NULL, 'imgruang/43345.png');
+INSERT INTO `ruang` (`id_ruang`, `nama_ruang`, `fid_area`, `updated_at`, `created_at`, `foto`, `kode_ruang`) VALUES
+(1, 'Aula', 1, NULL, NULL, NULL, 'AUL'),
+(3, 'Kerja', 1, NULL, NULL, NULL, 'KER'),
+(4, 'Gudang', 1, NULL, NULL, NULL, 'GDG'),
+(5, 'Gudangan', 3, '2016-06-08 10:14:12', NULL, NULL, 'GD1'),
+(7, 'Manajer', 1, NULL, NULL, NULL, 'MGR'),
+(9, 'Manajer', 3, NULL, NULL, NULL, 'MGR'),
+(10, 'Manajer', 5, NULL, NULL, NULL, 'MGR'),
+(11, 'ADM & KEU', 1, NULL, NULL, NULL, 'UAD'),
+(12, 'ADM & KEU', 3, NULL, NULL, NULL, 'UAD'),
+(13, 'ADM & KEU', 5, NULL, NULL, NULL, 'UAD'),
+(14, 'Gudang', 5, NULL, NULL, NULL, 'GDG');
 
 -- --------------------------------------------------------
 
@@ -236,12 +244,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `role`, `status_login`, `status_reg`, `last_login`, `id_pegawai`, `telepon`, `jenis_kelamin`, `foto`, `username`, `alamat`) VALUES
-(1, 'iqbal rifqi', 'rifqimaulaiqbal@gmail.com', '$2y$10$wJfdw6gKzlH9mkDr9VniPeWQPMaP2CK623htrjQvXcWhAlshpSrri', 'ZHAhY54XckXE3SldaXXDAgtCOz3K5P2vWEoiZzk9zPxj6n1jqLfK6JzmgW90', '2016-06-09 05:42:28', '2016-06-15 02:04:07', 1, 1, 1, '2016-06-15 09:39:20', '1213', '9999', 'L', 'imguser/53287.png', 'iqbal', 'kkk'),
+(1, 'iqbal rifqi', 'rifqimaulaiqbal@gmail.com', '$2y$10$BjZWIkjIVgr/Bdl9SfYmDuH9O6HDR7ceZ8FUEL7PZOVjthSvHsEX2', '5rjPvEf654xhgNuVIstmC8f4TJ7IrqAqazbUcdfgfn8rngHYLEoY6wCoQ0Cx', '2016-06-09 05:42:28', '2016-06-16 19:00:10', 1, 1, 1, '2016-06-17 02:00:42', '1213', '9999', 'L', 'imguser/53287.png', 'iqbal', 'kkk'),
 (3, 'rifqi maula', 'admin@admin.com', '$2y$10$O/wVxInDSOiomHmhTTnYPusAm0tSDBkp960d0DyIwFpFKy9Uegu/G', NULL, '2016-06-14 03:42:08', '2016-06-10 06:40:18', 2, 0, 1, NULL, '994', '000', 'P', 'imguser/48152.jpg', 'reza', NULL),
 (4, 'ronaldo', 'dodo@gmail.com', '$2y$10$M7b5LNvtBk1wjZYIgdrw3.3Pls6rMA77eccZnUIichNRjNKh7TX8y', 'rfly7DxNWfUpWckl1TH0VA5McE6m5zXQh2OoQP661gzjrJQ0NYe9TS29KA3O', '2016-06-10 06:45:45', '2016-06-11 01:17:31', 2, 0, 1, NULL, '779', '997', 'L', 'imgbarang/83517.jpg', 'penaldo', 'wayut'),
-(5, 'Bana Satriawan Ganteng Sekali', 'satriawan@gmail.com', '$2y$10$9iKSG6O2B/ezu.2CMHQqk.4HRFzyp2hgZtsiDfT2OJf4o1zO7YzVG', '9f82709990bb6ea7d4b9d44e47019e71', '2016-06-14 07:04:54', '2016-06-15 08:24:10', 2, 0, 0, NULL, '5113100050', '0857...', 'L', 'imguser/42390.jpg', 'b4na', 'Gubeng Surabaya'),
-(6, 'Didit Ganteng Sepiyanto', 'didit@gmail.com', '$2y$10$x.JeeF68bw7DVsnrLJzB5O.RoW9m91TGv98juzSMmJ1d62jKJ5Xey', NULL, '2016-06-14 07:06:49', '2016-06-14 07:06:49', 2, 0, 0, NULL, '5113100090', '0856....', 'L', 'imguser/49934.png', 'diiiit', 'Probolinggo'),
-(7, 'Ganteng', 'gurat@gmail.com', '$2y$10$MnNIyPkCeuEZnHj6GXlPzuPfGJOCj5dcCa9BTeHNSyNG1OTiP7Gm6', NULL, '2016-06-14 07:08:34', '2016-06-14 07:08:34', 2, 0, 0, NULL, 'Ganteng', '7751212', 'L', 'imguser/43058.jpg', 'leicester', 'Malang');
+(7, 'Ganteng', 'gurat@gmail.com', '$2y$10$MnNIyPkCeuEZnHj6GXlPzuPfGJOCj5dcCa9BTeHNSyNG1OTiP7Gm6', NULL, '2016-06-14 07:08:34', '2016-06-14 07:08:34', 2, 0, 0, NULL, 'Ganteng', '7751212', 'L', 'imguser/43058.jpg', 'leicester', 'Malang'),
+(8, 'bana', 'abc@gmail.com', '$2y$10$B8V5t6w6uKFXb0YXVkM/9uJxnn7.6BCW5.4DLWh.wkNhaCxCmUoMa', 'r5Xe7bc7QaH7QmdNb9tgLcC97wo9UgCiEOKlyW4KeMM8aTaCf8Pby8Xs7vTz', '2016-06-14 16:16:07', '2016-06-15 20:33:50', 1, 1, 1, '2016-06-16 05:16:00', '34342341', '0843413123', 'L', 'imguser/78285.png', 'bana', 'Jln Thamrin');
 
 --
 -- Indexes for dumped tables
@@ -257,7 +264,9 @@ ALTER TABLE `area`
 -- Indexes for table `barang`
 --
 ALTER TABLE `barang`
-  ADD PRIMARY KEY (`id_barang`);
+  ADD PRIMARY KEY (`id_barang`),
+  ADD KEY `fid_area_barang` (`fid_area`),
+  ADD KEY `fid_ruang_barang` (`fid_ruang`);
 
 --
 -- Indexes for table `password_resets`
@@ -270,7 +279,8 @@ ALTER TABLE `password_resets`
 -- Indexes for table `ruang`
 --
 ALTER TABLE `ruang`
-  ADD PRIMARY KEY (`id_ruang`);
+  ADD PRIMARY KEY (`id_ruang`),
+  ADD KEY `fid_area` (`fid_area`);
 
 --
 -- Indexes for table `users`
@@ -287,22 +297,39 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `area`
 --
 ALTER TABLE `area`
-  MODIFY `id_area` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_area` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `ruang`
 --
 ALTER TABLE `ruang`
-  MODIFY `id_ruang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_ruang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `barang`
+--
+ALTER TABLE `barang`
+  ADD CONSTRAINT `fid_area_barang` FOREIGN KEY (`fid_area`) REFERENCES `area` (`id_area`),
+  ADD CONSTRAINT `fid_ruang_barang` FOREIGN KEY (`fid_ruang`) REFERENCES `ruang` (`id_ruang`);
+
+--
+-- Constraints for table `ruang`
+--
+ALTER TABLE `ruang`
+  ADD CONSTRAINT `fid_area` FOREIGN KEY (`fid_area`) REFERENCES `area` (`id_area`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
